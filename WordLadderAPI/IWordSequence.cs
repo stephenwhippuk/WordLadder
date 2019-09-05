@@ -16,5 +16,7 @@ namespace WordLadderAPI
         public abstract void Append(IWordNode node);
 
         public abstract bool Contains(IWordNode node);
+
+        public abstract void Save(IWordWriter writer);
     }
 }

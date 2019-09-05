@@ -13,6 +13,10 @@ namespace WordLadderAPI
         {
             Word = word;
         }
+        public WordNode()
+        {
+
+        }
 
         public override bool isStepAway(IWordNode nod)
         {

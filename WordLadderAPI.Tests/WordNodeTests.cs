@@ -1,27 +1,28 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace WordLadderAPI.Tests
 {
     public class WordNodeTests
     {
+        WordLadderAPI.WordNode node;
+        WordLadderAPI.WordNode node2;
+
         [SetUp]
         public void Setup()
         {
+            node = new WordLadderAPI.WordNode("feed");
+            node2 = new WordLadderAPI.WordNode("seed");
         }
 
         [Test]
         public void WordSet()
         {
-            WordLadderAPI.WordNode node = new WordLadderAPI.WordNode("hello");
-            Assert.AreEqual("hello", node.Word);
+            Assert.AreEqual("feed", node.Word);
             Assert.Pass("Test1 Successful");
         }
         [Test]
         public void OneStepAway_1Step()
         {
-            WordLadderAPI.WordNode node = new WordLadderAPI.WordNode("feed");
-            WordLadderAPI.WordNode node2 = new WordLadderAPI.WordNode("seed");
-            
             Assert.IsTrue(node.isStepAway(node2));
             Assert.Pass("success {0} is one away from {1}",node.Word, node2.Word);
         }
@@ -29,8 +30,7 @@ namespace Tests
         [Test]
         public void OneStepAway_2Step()
         {
-            WordLadderAPI.WordNode node = new WordLadderAPI.WordNode("feed");
-            WordLadderAPI.WordNode node2 = new WordLadderAPI.WordNode("seen");
+            node2.Word = "seen";
 
             Assert.IsFalse(node.isStepAway(node2));
             Assert.Pass("success: {0} is not one away from {1}", node.Word, node2.Word);
@@ -39,8 +39,7 @@ namespace Tests
         [Test]
         public void OneStepAway_Equal()
         {
-            WordLadderAPI.WordNode node = new WordLadderAPI.WordNode("feed");
-            WordLadderAPI.WordNode node2 = new WordLadderAPI.WordNode("feed");
+            node2.Word = "feed";
 
             Assert.IsFalse(node.isStepAway(node2));
             Assert.Pass("success: {0} is not one away from {1}", node.Word, node2.Word);
@@ -49,8 +48,7 @@ namespace Tests
         [Test]
         public void ONeStepAway_diffLengths()
         {
-            WordLadderAPI.WordNode node = new WordLadderAPI.WordNode("feed");
-            WordLadderAPI.WordNode node2 = new WordLadderAPI.WordNode("feeds");
+            node2.Word = "feeds";
 
             Assert.IsFalse(node.isStepAway(node2));
             Assert.Pass("success: {0} is not one away from {1} as different lengths", node.Word, node2.Word);
