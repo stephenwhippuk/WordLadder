@@ -13,6 +13,10 @@ namespace WordLadderAPI
         {
             Word = word;
         }
+
+        /// <summary>
+        /// Default Constructor required to satisfy new constraint of PathCalculator  
+        /// </summary>
         public WordNode()
         {
 

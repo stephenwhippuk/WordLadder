@@ -10,9 +10,14 @@ namespace WordLadderAPI
     /// </summary>
     public abstract class ISequenceCalculator
     {
-        public IWordNode Start { get; set; }
-        public IWordNode Finish { get; set; }
-        public IEnumerable<IWordNode> WordPool { get; set; }
+        public abstract IWordNode Start { get; set; }
+        public abstract IWordNode Finish { get; set; }
+
+        /// <summary>
+        ///  Conceptual Word Pool is provided using an IEnumerable collection of IWordNodes
+        ///  See implementation notes in design document
+        /// </summary>
+        public abstract IEnumerable<IWordNode> WordPool { get; set; }
         public abstract bool Load(IWordReader reader);
         public abstract bool GetPath(IWordSequence path);
     }

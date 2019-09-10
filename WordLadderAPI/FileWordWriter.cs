@@ -21,7 +21,7 @@ namespace WordLadderAPI
         {
             if (IsOpen)
             {
-                streamWriter.WriteLine(w);
+                streamWriter.WriteLine(w.Word);
                 _numwrites++;
             }
         }
