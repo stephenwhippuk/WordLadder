@@ -26,10 +26,8 @@ namespace WordLadderAPI
 /// </summary>
         public override IEnumerable<IWordNode> WordPool
         {
-            get => (IEnumerable<IWordNode>) mWordPool; set
-            {
-                mWordPool = (T2) value;
-            }
+            get => (IEnumerable<IWordNode>) mWordPool;
+            set => mWordPool = (T2) value;
         }
 
         // private enumeration to make clear return values 
@@ -40,13 +38,15 @@ namespace WordLadderAPI
             // trivially reject if path would be longer than existing path
             if (seqFound && seq.Length >= shortest.Length)
             {
+                
                 return return_val.DONE;
             }
             // valid sequence is found which must be shorter than any already found
             else if (next.Word == end.Word)
             {
+              
                 seq.Append(next);
-                
+
                 // copy rather than simply use assignment and new as we don't know type of shortest and this object was provided for us
                 shortest.Copy(seq);
 
@@ -57,13 +57,22 @@ namespace WordLadderAPI
             else
             {
                 // add next to the possible sequence
-                seq.Append(next);
+                
+                
                 foreach (var word in WordPool)
                 {
-                    if (word.isStepAway(next))
+                    
+                    if (word.isStepAway(next) && !seq.Contains(word))
                     {
-                        // recursively call function for next step
+                        
+                        // Add next to seq before moving in
+                        seq.Append(next);
+
+                        // recursively call to move in
                         return_val ret = find_path(word, end, seq);
+
+                        // remove next from seq before next iteration
+                        seq.Pop();
 
                         // if path was accepted or rejected by length then exit foreach to step back a recursion level
                         // reasoning, if next was trivially rejected the all possible nexts will be
@@ -75,6 +84,7 @@ namespace WordLadderAPI
                         }
                     }
                 }
+
             }
             return return_val.CONTINUE;
         }
@@ -84,6 +94,7 @@ namespace WordLadderAPI
             mWordPool = new T2();
             mStart = null;
             mFinish = null;
+            seqFound = false;
         }
 
         public override bool GetPath(IWordSequence path)
@@ -105,7 +116,6 @@ namespace WordLadderAPI
             if (startFound && finishFound)
             {
                 // providind words are in WOrdPool we can run our search
-
                 // We wil allow our shortestpath to be a reference to an object passed in IOC
                 shortest = path;
                 seqFound = false;

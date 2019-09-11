@@ -21,7 +21,9 @@ namespace WordLadderAPI
         public abstract void Copy(IWordSequence node);
         public abstract void Save(IWordWriter writer);
 
-        public abstract IWordNode operator []  (int i);
+    
+
+            public abstract IWordNode Pop();
 
     }
 }

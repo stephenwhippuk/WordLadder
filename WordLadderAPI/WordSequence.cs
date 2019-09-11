@@ -51,18 +51,22 @@ namespace WordLadderAPI
 
         public override string ToString()
         {
-            string retval = "";
-            for (int i = 0; i < mData.Count-1; i++)
+            if (mData.Count > 0)
             {
-                retval += mData[i].Word + ", ";
+                string retval = "";
+                for (int i = 0; i < mData.Count-1; i++)
+                {
+                    retval += mData[i].Word + ", ";
+                }
+                retval += mData[mData.Count - 1].Word;
+                return retval;
             }
-            retval += mData[mData.Count - 1].Word;
-            return retval;
+            return "";
         }
 
         public override void Append(IWordNode node)
         {
-            if (node != null)
+            if (node != null && !Contains(node))
             {
                 mData.Add(node);
             }
@@ -100,10 +104,21 @@ namespace WordLadderAPI
         public override void Copy(IWordSequence node)
         {
             this.mData.Clear();
-            for (int i = 0; i > node.Length; i++)
+            
+            for (int i = 0; i < node.Length; i++)
             {
+                
                 this.mData.Add(node[i]);
+                
             }
+
+        }
+
+        public override IWordNode Pop()
+        {
+            var  retval = mData[mData.Count - 1];
+            this.mData.RemoveAt(mData.Count - 1);
+            return retval;
         }
     }
 }
