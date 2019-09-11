@@ -47,6 +47,8 @@ namespace WordLadderAPI
         public WordSequence()
         {
             mData = new List<IWordNode>();
+            CheckUniqueConstraint = false;
+            CheckLinkConstraint = false;
         }
 
         public override string ToString()
@@ -66,8 +68,25 @@ namespace WordLadderAPI
 
         public override void Append(IWordNode node)
         {
-            if (node != null && !Contains(node))
+            if (node != null)
             {
+                // for efficiency we put these tests behind guards
+                // and allow calling code to manage this is desired.
+                if (CheckUniqueConstraint)
+                {
+                    if(mData.Contains(node))
+                    {
+                        throw new InvalidOperationException("Node being Added to Sequence is not unique");
+                    }
+                }
+                if (CheckLinkConstraint)
+                {
+                    if (!LastWord.isStepAway(node))
+                    {
+                        throw new InvalidOperationException("Node Being added to Sequence does not form valid Sequence");
+                    }
+                }
+  
                 mData.Add(node);
             }
         }

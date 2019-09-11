@@ -4,6 +4,9 @@ namespace WordLadderAPI
 {
     public abstract class IWordSequence
     {
+        public bool CheckUniqueConstraint { get; set; }
+        public bool CheckLinkConstraint { get; set; }
+
         public abstract int Length { get;}
         public abstract IWordNode this[int i] { get; }
 

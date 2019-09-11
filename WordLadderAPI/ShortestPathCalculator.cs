@@ -49,21 +49,20 @@ namespace WordLadderAPI
 
                 // copy rather than simply use assignment and new as we don't know type of shortest and this object was provided for us
                 shortest.Copy(seq);
-
+                seq.Pop();
                 seqFound = true;
                 return return_val.DONE;
             }
             // find next possible steps
             else
-            {
-                // add next to the possible sequence
-                
-                
+            {                
                 foreach (var word in WordPool)
                 {
                     
                     if (word.isStepAway(next) && !seq.Contains(word))
                     {
+                        // TODO: Work out why Logical Design with append and pop called outside of loop
+                        // was failing, for now this works if a less efficient solution.
                         
                         // Add next to seq before moving in
                         seq.Append(next);
