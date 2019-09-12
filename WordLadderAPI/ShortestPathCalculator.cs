@@ -143,6 +143,7 @@ namespace WordLadderAPI
         {
             if (reader.IsOpen)
             {
+                mWordPool.Clear();
                 while (!reader.AtEnd)
                 {
                     mWordPool.Add(reader.Next());
