@@ -31,16 +31,22 @@ namespace WordLadder
 
                 Console.WriteLine("Calculating Shortest Path...");
                 WordSequence shortest = new WordSequence();
-                calculator.GetPath(shortest);
+                bool pathFound = calculator.GetPath(shortest);
+                if (pathFound)
+                {
+                    Console.WriteLine("Saving Results to Output File...");
+                    var writer = new FileWordWriter(args[3]);
+                    writer.Open();
+                    shortest.Save(writer);
+                    writer.Close();
 
-                Console.WriteLine("Saving Results to Output File...");
-                var writer = new FileWordWriter(args[3]);
-                writer.Open();
-                shortest.Save(writer);
-                writer.Close();
-
-                Console.WriteLine("\nThe Shortest Path From \"" + args[0] + "\" to \"" + args[1] + "\" is:");
-                Console.WriteLine("[" + shortest.ToString() + "]");
+                    Console.WriteLine("\nThe Shortest Path From \"" + args[0] + "\" to \"" + args[1] + "\" is:");
+                    Console.WriteLine("[" + shortest.ToString() + "]");
+                }
+                else
+                {
+                    Console.WriteLine("There was no path between \"" + args[0] + "\" and \"" + args[1] + "\"");
+                }
             }
             catch(Exception e)
             {

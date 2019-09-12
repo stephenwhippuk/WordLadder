@@ -192,6 +192,26 @@ namespace WordLadderAPI.Tests
                 Assert.Fail(e.Message);
             }
         }
+        [Test]
+        public void Test_NoPath()
+        {
+            List<IWordNode> wordpool = new List<IWordNode>
+            {
+                new WordNode{ Word = "Time"},
+                new WordNode{ Word = "Tame"},
+               new WordNode{ Word = "Dine"},
+                new WordNode{ Word = "Wine"},
+                 new WordNode{ Word = "Take"},
+            };
 
+            calculator.WordPool = wordpool;
+
+            WordSequence seq = new WordSequence();
+            bool retval = calculator.GetPath(seq);
+            Console.WriteLine(seq.ToString());
+
+            // there is no path
+            Assert.IsFalse(retval, "Error: There is no path");
+        }
     }
 }
