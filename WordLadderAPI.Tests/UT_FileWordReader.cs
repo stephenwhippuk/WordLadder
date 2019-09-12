@@ -75,7 +75,7 @@ namespace WordLadderAPI.Tests
                 }
                 
             }
-            catch (Exception e)
+            catch
             {
                 Assert.Pass();
             }

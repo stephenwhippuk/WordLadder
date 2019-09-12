@@ -98,6 +98,7 @@ namespace WordLadderAPI
 
         public override bool GetPath(IWordSequence path)
         {
+            
             bool startFound = false, finishFound = false;
             // first test to see that words in dictionary
             foreach (var w in WordPool)
@@ -127,7 +128,15 @@ namespace WordLadderAPI
 
                 return seqFound;
             }
-            return false;
+            else if (!startFound)
+            {
+                throw new InvalidOperationException("Start Word is not WordPool");
+            }
+            else
+            {
+                throw new InvalidOperationException("Finish Word is not WordPool");
+            }
+            
         }
 
         public override bool Load(IWordReader reader)

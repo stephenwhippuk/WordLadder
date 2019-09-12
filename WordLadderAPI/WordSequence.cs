@@ -123,7 +123,7 @@ namespace WordLadderAPI
             else
             {
                 // Let calling code deal with this error
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Connection is Closed");
             }
         }
         /// <summary>
