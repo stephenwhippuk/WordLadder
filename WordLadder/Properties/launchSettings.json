@@ -2,7 +2,7 @@
   "profiles": {
     "WordLadder": {
       "commandName": "Project",
-      "commandLineArgs": "Wine Time input.txt path.dat"
+      "commandLineArgs": "hour hurt words-english.txt path.dat"
     }
   }
 }

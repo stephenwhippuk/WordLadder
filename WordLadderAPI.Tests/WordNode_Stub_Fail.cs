@@ -10,5 +10,10 @@ namespace WordLadderAPI.Tests
         {
             return false;
         }
+
+        public override bool IsWord(string word = null)
+        {
+            return false;
+        }
     }
 }

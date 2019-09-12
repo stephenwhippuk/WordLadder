@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Text.RegularExpressions;
 namespace WordLadderAPI
 {
     /// <summary>
@@ -70,6 +70,20 @@ namespace WordLadderAPI
             {
                 return false;
             }
+
+
+        }
+
+        public override bool IsWord(string word = null)
+        {
+            if (word == null)
+            {
+                word = Word;
+            }
+            // use regex to match
+            string pattern = @"^[A-Za-z][a-z]+";
+            Regex match = new Regex(pattern);
+            return match.IsMatch(word);
         }
     }
 }

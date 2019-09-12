@@ -17,5 +17,7 @@ namespace WordLadderAPI
         /// <param name="node">word to be compared against</param>
         /// <returns>return true iff there is only a single step difference  </returns>
         public abstract bool isStepAway(IWordNode node);
+
+        public abstract bool IsWord(string word = null);
     }
 }

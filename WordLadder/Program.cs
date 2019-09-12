@@ -16,6 +16,8 @@ namespace WordLadder
             List<IWordNode> pool = new List<IWordNode>();
 
             ShortestSequenceCalculator<WordSequence, List<IWordNode>> calculator = new ShortestSequenceCalculator<WordSequence, List<IWordNode>> { Start = first, Finish = last, WordPool = pool };
+            calculator.WordLength = 4;
+            calculator.FixedWordLength = true;
             try
             {
                 Console.WriteLine("\nStart Word is \"" + args[0] + "\"");
@@ -28,6 +30,7 @@ namespace WordLadder
                 reader.Open();
                 calculator.Load(reader);
                 reader.Close();
+                Console.WriteLine(calculator.WordPoolSize + " Words Loaded");
 
                 Console.WriteLine("Calculating Shortest Path...");
                 WordSequence shortest = new WordSequence();

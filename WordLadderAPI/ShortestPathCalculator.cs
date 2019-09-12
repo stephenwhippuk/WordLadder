@@ -30,6 +30,8 @@ namespace WordLadderAPI
             set => mWordPool = (T2) value;
         }
 
+        public override int WordPoolSize => mWordPool.Count;
+
         // private enumeration to make clear return values 
         private enum return_val { DONE, CONTINUE};
 
@@ -146,7 +148,18 @@ namespace WordLadderAPI
                 mWordPool.Clear();
                 while (!reader.AtEnd)
                 {
-                    mWordPool.Add(reader.Next());
+                    IWordNode tmp = reader.Next();
+                    if (FixedWordLength && tmp.Word.Length != WordLength)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if (tmp.IsWord())
+                        {
+                            mWordPool.Add(tmp);
+                        }
+                    }
                 }
                 return true;
             }

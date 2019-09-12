@@ -74,5 +74,35 @@ namespace WordLadderAPI.Tests
             word2.Word = "Tests";
             Assert.IsFalse(word1.isStepAway(word2), "FAIL: IsStepAway true for strings of different length");
         }
+        [Test]
+        public void Test_IsWord_ValidWord()
+        {
+            bool value = word1.IsWord("test");
+            Assert.IsTrue(value);
+        }
+        [Test]
+        public void Test_IsWord_CapitalisedFirst()
+        {
+            bool value = word1.IsWord("Test");
+            Assert.IsTrue(value);
+        }
+        [Test]
+        public void Test_IsWord_CapitalisedOther()
+        {
+            bool value = word1.IsWord("tEst");
+            Assert.IsFalse(value);
+        }
+        [Test]
+        public void Test_IsWord_NoneLetterStart()
+        {
+            bool value = word1.IsWord("1est");
+            Assert.IsFalse(value);
+        }
+        [Test]
+        public void Test_IsWord_NoneLetterOther()
+        {
+            bool value = word1.IsWord("T/st");
+            Assert.IsFalse(value);
+        }
     }
 }

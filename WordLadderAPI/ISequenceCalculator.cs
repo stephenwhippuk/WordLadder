@@ -13,6 +13,10 @@ namespace WordLadderAPI
         public abstract IWordNode Start { get; set; }
         public abstract IWordNode Finish { get; set; }
 
+        public bool FixedWordLength { get; set;  }
+        public  int WordLength { get; set; }
+
+        public abstract int WordPoolSize { get; }
         /// <summary>
         ///  Conceptual Word Pool is provided using an IEnumerable collection of IWordNodes
         ///  See implementation notes in design document
