@@ -26,6 +26,13 @@ namespace WordLadderAPI
         {
             // Trivial Rejections 
 
+            // if either string is empty then they are not one step away
+            if (nod.Word == "" || Word == "")
+            {
+                return false;
+            }
+            
+
             // If words are equal then they are not 1 step away
             if (this.Word.Equals(nod.Word))
             {

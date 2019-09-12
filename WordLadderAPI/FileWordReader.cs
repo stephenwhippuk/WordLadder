@@ -39,10 +39,13 @@ namespace WordLadderAPI
                 // return the created word
                 return myWord;
             }
+            else if (AtEnd)
+            {
+                throw new InvalidOperationException("Error: Trying to Read Past EOF");
+            }
             else
             {
-                // returns NULL if the stream is closed or at EOF
-                return null;
+                throw new InvalidOperationException("Error: Stream is Closed");
             }
         }
 

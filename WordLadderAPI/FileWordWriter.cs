@@ -24,6 +24,10 @@ namespace WordLadderAPI
                 streamWriter.WriteLine(w.Word);
                 _numwrites++;
             }
+            else
+            {
+                throw new InvalidOperationException("Error: Stream is Closed");
+            }
         }
 
         public override bool Open()

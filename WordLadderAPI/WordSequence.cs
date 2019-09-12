@@ -70,16 +70,22 @@ namespace WordLadderAPI
         {
             if (node != null)
             {
+                // empty strings may not be in sequence
+                if (node.Word == "")
+                {
+                    return;
+                }
                 // for efficiency we put these tests behind guards
                 // and allow calling code to manage this is desired.
                 if (CheckUniqueConstraint)
                 {
-                    if(mData.Contains(node))
+                    
+                    if(Contains(node))
                     {
                         throw new InvalidOperationException("Node being Added to Sequence is not unique");
                     }
                 }
-                if (CheckLinkConstraint)
+                if (CheckLinkConstraint && mData.Count > 0)
                 {
                     if (!LastWord.isStepAway(node))
                     {
@@ -97,6 +103,7 @@ namespace WordLadderAPI
             {
                 if (n.Word.Equals(node.Word))
                 {
+                    
                     return true;
                 }
             }
@@ -119,25 +126,32 @@ namespace WordLadderAPI
                 throw new InvalidOperationException();
             }
         }
-
+        /// <summary>
+        /// Copy currently only provides a shallow copy 
+        /// -- this requires a way of allocating to fix it and would be a future enhancement
+        /// -- for purposes of this demonstration it doesn't cause bugs
+        /// </summary>
+        /// <param name="node"></param>
         public override void Copy(IWordSequence node)
         {
             this.mData.Clear();
             
             for (int i = 0; i < node.Length; i++)
             {
-                
-                this.mData.Add(node[i]);
-                
+                this.mData.Add(node[i]);   
             }
 
         }
 
         public override IWordNode Pop()
         {
-            var  retval = mData[mData.Count - 1];
-            this.mData.RemoveAt(mData.Count - 1);
-            return retval;
+            if (mData.Count > 0)
+            {
+                var retval = mData[mData.Count - 1];
+                this.mData.RemoveAt(mData.Count - 1);
+                return retval;
+            }
+            return null;
         }
     }
 }
