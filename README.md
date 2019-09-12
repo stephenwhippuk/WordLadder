@@ -12,4 +12,4 @@ and thus for a input set of reasonable size it becomes unmanagably slow.
 The main purpose was to demonstrate good use of OOP principles in design etc, rather than
 to provide a practical solution in terms of performance. 
 
-here are manhy improvements that would be made were this to be taken further., 
+here are many improvements that would be made were this to be taken further., 
