@@ -176,14 +176,21 @@ namespace WordLadderAPI.Tests
         public void Test_Load()
         {
             WordReader_Stub reader = new WordReader_Stub();
-            calculator.Load(reader);
+            try
+            {
+                calculator.Load(reader);
 
-            WordSequence seq = new WordSequence();
-            calculator.GetPath(seq);
-            Console.WriteLine(seq.ToString());
-            Assert.IsTrue(seq.Length == 6, "Sequence not complete");
-            Assert.IsTrue(seq.FirstWord.Word == calculator.Start.Word, "Sequence doesn;t begin with start");
-            Assert.IsTrue(seq.LastWord.Word == calculator.Finish.Word, "sequence doesn;t end with finish");
+                WordSequence seq = new WordSequence();
+                calculator.GetPath(seq);
+                Console.WriteLine(seq.ToString());
+                Assert.IsTrue(seq.Length == 6, "Sequence not complete");
+                Assert.IsTrue(seq.FirstWord.Word == calculator.Start.Word, "Sequence doesn;t begin with start");
+                Assert.IsTrue(seq.LastWord.Word == calculator.Finish.Word, "sequence doesn;t end with finish");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
         }
 
     }
